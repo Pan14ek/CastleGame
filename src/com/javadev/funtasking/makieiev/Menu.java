@@ -4,35 +4,36 @@ import java.util.Scanner;
 
 public class Menu {
     public void activateGame() {
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hi,hero! Write your name:");
         String name = scanner.next();
-        Player player = new Player(name);
-        Levels levels = new Levels(player);
-        levels.setLevels();
-        menuController(levels, scanner);
+        Game game = new Game(new Player(name));
+        game.setLevels();
+        menuController(game, scanner);
     }
 
-    public void menuInformation() {
+    private void menuInformation() {
         System.out.println("Choose point:");
         System.out.println("1.Start game");
         System.out.println("2.Exit");
     }
 
-    private void menuController(Levels levels, Scanner scanner) {
+    private void menuController(Game game, Scanner scanner) {
         boolean startGame = true;
-        levels.getSpecialMode(scanner);
+        game.getSpecialMode(scanner);
         do {
             menuInformation();
             switch (scanner.nextInt()) {
                 case 1:
-                    levels.printQuests(scanner);
+                    game.printQuests(scanner);
                     break;
                 case 2:
                     startGame = false;
                     break;
+                default:
+                    System.out.println("Your wrote wrong number");
+                    break;
             }
-        } while (startGame && levels.getPlayer().getHealth() > 0);
+        } while (startGame && game.getPlayer().getHealth() > 0);
     }
 }

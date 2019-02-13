@@ -6,11 +6,11 @@ public class Quest {
     private String description;
     private boolean checked;
 
-    public Quest(){
+    public Quest() {
 
     }
 
-    public Quest(String description,String answer,int score,boolean checked){
+    public Quest(String description, String answer, int score, boolean checked) {
         this.description = description;
         this.answer = answer;
         this.score = score;
