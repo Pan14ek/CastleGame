@@ -1,0 +1,21 @@
+CREATE TABLE Level(
+  Id_Level int primary key ,
+  Title char(20) not null ,
+  History char(max) not null ,
+  EntryScoreToNextLevel int not null
+);
+
+CREATE TABLE Quest(
+  Id_Quest int primary key ,
+  Score int not null ,
+  Description char(max) not null ,
+  Answer char(max) not null,
+  Id_Level int REFERENCES Level(Id_Level)
+);
+
+CREATE TABLE Player(
+  Id_Player int primary key ,
+  Nickname char(16) not null ,
+  Total_Score int not null ,
+  Health int not null
+);
