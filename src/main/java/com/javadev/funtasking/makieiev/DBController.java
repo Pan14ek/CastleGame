@@ -13,17 +13,12 @@ public class DBController {
     static final String PASSWORD = "admin";
 
     public static void main(String[] args) {
-        List<Quest> list = getQuestList();
-        for (Quest quest : list) {
-            System.out.println(quest.getDescription());
-            System.out.println(quest.getAnswer());
-            System.out.println(quest.getScore());
-        }
+
     }
 
     //quests ==> level
     //Answer,Score,Description
-    public static List getQuestList() {
+    public List<Quest> getQuestList() {
         List<Quest> quests = new ArrayList<Quest>();
         try {
             Class.forName("org.h2.Driver");
@@ -36,6 +31,7 @@ public class DBController {
                 String answer = rs.getString("ANSWER");
                 int score = rs.getInt("SCORE");
                 String description = rs.getString("DESCRIPTION");
+
                 quests.add(new Quest(answer, description, score));
             }
             rs.close();
@@ -47,8 +43,5 @@ public class DBController {
         return quests;
     }
 
-    public void connectToDB() {
-
-    }
 
 }
