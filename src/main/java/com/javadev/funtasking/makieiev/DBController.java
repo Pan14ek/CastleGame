@@ -18,13 +18,13 @@ public class DBController {
 
     //quests ==> level
     //Answer,Score,Description
-    public List<Quest> getQuestList() {
+    private List<Quest> getQuestList(int idLevel) {
         List<Quest> quests = new ArrayList<Quest>();
         try {
             Class.forName("org.h2.Driver");
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
-            String sql = "SELECT ANSWER,SCORE,DESCRIPTION FROM QUEST";
+            String sql = "SELECT ANSWER,SCORE,DESCRIPTION FROM QUEST WHERE QUEST.ID_LEVEL = " + idLevel;
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
@@ -41,6 +41,33 @@ public class DBController {
             e.printStackTrace();
         }
         return quests;
+    }
+
+
+    public List<Level> getLevelList() {
+        List<Level> levels = new ArrayList<Level>();
+        try {
+            Class.forName("org.h2.Driver");
+            Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            String sql = "SELECT ID_LEVEL,ENTRYSCORETONEXTLEVEL,TITLE,HISTORY FROM LEVEL";
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                int entryScoreToNextLevel = rs.getInt("ENTRYSCORETONEXTLEVEL");
+                String title = rs.getString("TITLE");
+                String history = rs.getString("HISTORY");
+                int idLevel = rs.getInt("ID_LEVEL");
+                levels.add(new Level(getQuestList(idLevel), entryScoreToNextLevel, title, history));
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return levels;
     }
 
 
