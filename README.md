@@ -11,4 +11,4 @@ I wrote five classes:
 <br/>4.Menu;
 <br/>5.Game.
 
-Datebase - H2.
+Database - H2.
