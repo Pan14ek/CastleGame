@@ -40,15 +40,8 @@ public class Game {
     }
 
     public void setLevels() {
-        this.levelsList = new ArrayList<Level>();
-        Level firstLevel = new Level();
-        Level secondLevel = new Level();
-
-        //firstLevel.setLevelKing();
-        //secondLevel.setLevelWitch();
-
-        this.levelsList.add(firstLevel);
-        this.levelsList.add(secondLevel);
+        DBController dbController = new DBController();
+        this.levelsList = dbController.getLevelList();
     }
 
     public void printQuests(Scanner scanner) {

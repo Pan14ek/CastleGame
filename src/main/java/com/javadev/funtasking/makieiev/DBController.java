@@ -32,7 +32,8 @@ public class DBController {
                 int score = rs.getInt("SCORE");
                 String description = rs.getString("DESCRIPTION");
 
-                quests.add(new Quest(answer, description, score));
+                //String description, String answer, int score
+                quests.add(new Quest(description, answer, score));
             }
             rs.close();
             statement.close();
@@ -58,6 +59,7 @@ public class DBController {
                 String title = rs.getString("TITLE");
                 String history = rs.getString("HISTORY");
                 int idLevel = rs.getInt("ID_LEVEL");
+                //List<Quest> quests, int entryScoreToNextLevel, String title, String history
                 levels.add(new Level(getQuestList(idLevel), entryScoreToNextLevel, title, history));
             }
             rs.close();
