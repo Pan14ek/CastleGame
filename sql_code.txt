@@ -1,21 +1,65 @@
 CREATE TABLE Level(
-  Id_Level int primary key ,
-  Title char(20) not null ,
-  History char(max) not null ,
-  EntryScoreToNextLevel int not null
+    Id_Level int IDENTITY(1,1) primary key ,
+    Title char(20) not null ,
+    History char(max) not null ,
+    EntryScoreToNextLevel int not null
 );
 
 CREATE TABLE Quest(
-  Id_Quest int primary key ,
-  Score int not null ,
-  Description char(max) not null ,
-  Answer char(max) not null,
-  Id_Level int REFERENCES Level(Id_Level)
+                    Id_Quest int IDENTITY(1,1) primary key ,
+                    Score int not null ,
+                    Description char(max) not null ,
+                    Answer char(max) not null,
+                    Id_Level int,
+                    CONSTRAINT QuestLevel FOREIGN KEY (Id_Level) REFERENCES Level(Id_Level)
 );
 
 CREATE TABLE Player(
-  Id_Player int primary key ,
-  Nickname char(16) not null ,
-  Total_Score int not null ,
-  Health int not null
+                     Id_Player int IDENTITY(1,1) primary key ,
+                     Nickname char(16) not null ,
+                     Total_Score int not null
 );
+
+CREATE TABLE Game(
+                   Id_Game int IDENTITY(1,1) primary key ,
+                   Id_Player int REFERENCES Player(Id_Player),
+                   ID_Level int REFERENCES Level(Id_Level),
+                   Time datetime not null
+);
+
+INSERT INTO Level(Id_Level, Title, History, EntryScoreToNextLevel) VALUES ( 1,'King room','Хах,думал все на иностранном языке будет? /n ' ||
+                                                                                          'Я человек простой,меня другие языки не интересуют,' ||
+                                                                                          'меня интересуют только оружие и все средневековое.\n ' ||
+                                                                                          'Давай я тебе задам пару вопросов по средневековье,если ответишь,' ||
+                                                                                          'то пойдешь своей дорогой!',20 );
+
+INSERT INTO Level(Id_Level, Title, History, EntryScoreToNextLevel) VALUES (2,'Witch room','Уууу,я вижу ты от рыцаря,он сказал,что ' ||
+                                                                                          'ты хотел бы на английском языке поговорить,а нетушки! \n ' ||
+                                                                                          'Помучаю я тебя,порешайка мне задачки,а то я решить что то не могу.',60);
+
+INSERT INTO Quest(Id_Quest, Score, Description, Answer, Id_Level) VALUES ( 1,5,'Феодалы очень любили пировать  в своих замках.' ||
+                                                                               'Как ты думаешь, из чего была сделана большая часть тарелок.Выбери букву:\n' ||
+                                                                               ' а)Хлеб;\n' ||
+                                                                               'б)Дерево;\n' ||
+                                                                               'в)Железа.','a',1 );
+
+INSERT INTO Quest(Id_Quest, Score, Description, Answer, Id_Level) VALUES (2,10,'Как называется самая высокая и неприступная башня замка(центральная башня):' ||
+                                                                               'Выбери букву:\n' ||
+                                                                               'а)Каркасон;\n' ||
+                                                                               'б)Замковый туалет на 2 этаже по левому коридору;\n' ||
+                                                                               'в)Донжон.','в',1);
+
+INSERT INTO Quest(Id_Quest, Score, Description, Answer, Id_Level) VALUES (3,5,'Первые замки были построены из:' ||
+                                                                              'Выбери букву:\n' ||
+                                                                              'а)Грязи;\n' ||
+                                                                              'б)Камня;\n' ||
+                                                                              'в)Дерева;\n' ||
+                                                                              'г)Кожи.','в',1);
+
+INSERT INTO Quest(Id_Quest, Score, Description, Answer, Id_Level) VALUES (4,10,'Это кто то тут, то там\n' ||
+                                                                               'тускло светит по ночам?\n ' ||
+                                                                               'Словно горстка звезд с небес,\n ' ||
+                                                                               'опустилась ночью в лес.','Светлячок',2);
+
+INSERT INTO Quest(Id_Quest, Score, Description, Answer, Id_Level) VALUES (5,10,'Странный дождь порой идет:\n' ||
+                                                                               'сотней струй он кверху бьет.','Фонтан',2);

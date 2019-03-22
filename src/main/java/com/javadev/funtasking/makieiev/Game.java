@@ -1,6 +1,5 @@
 package com.javadev.funtasking.makieiev;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,7 +54,7 @@ public class Game {
 
     private void checkPlayerScoreWithEntryToNextLevel(Level level) {
         if (this.player.getTotalScore() >= level.getEntryScoreToNextLevel()) {
-            System.out.println("Поздравляем," + this.player.getNickname() + " прошли на следующий уровень!");
+            System.out.print("Поздравляем," + this.player.getNickname() + " прошли на следующий уровень!");
             System.out.println("На данный момент, " + this.player.getNickname() + " , у вас "
                     + player.getTotalScore() + " баллов\n");
         }
@@ -85,18 +84,23 @@ public class Game {
 
     private void isLostGame() {
         if (this.player.getHealth() <= 0) {
-            System.out.println("Вы проиграли(You lost)");
-            System.out.println("В тюрьму " + this.player.getNickname() + " ! Подумаешь , поднимешся");
+            getInfoAboutLostGame();
             System.exit(0);
         }
     }
 
     private void isLostGame(Level level) {
-        if (this.player.getTotalScore() <= level.getEntryScoreToNextLevel()) {
-            System.out.println("Вы проиграли(You lost)");
-            System.out.println("В тюрьму " + this.player.getNickname() + " ! Подумаешь , поднимешся");
+        if (this.player.getTotalScore() < level.getEntryScoreToNextLevel()) {
+            getInfoAboutLostGame();
             System.exit(0);
         }
+    }
+
+    private void getInfoAboutLostGame() {
+        DBController dbController = new DBController();
+        System.out.println("Вы проиграли(You lost)");
+        System.out.println("В тюрьму " + this.player.getNickname() + " ! Подумаешь , поднимешся");
+        dbController.addNewScorePlayer(this.player.getNickname(), this.player.getTotalScore());
     }
 
     public void getSpecialMode(Scanner scanner) {
@@ -124,9 +128,7 @@ public class Game {
 
     }
 
-
-
-    public void menuMode() {
+    private void menuMode() {
         System.out.println("Choose your mode:");
         System.out.println("1.Easy;");
         System.out.println("2.Middle;");

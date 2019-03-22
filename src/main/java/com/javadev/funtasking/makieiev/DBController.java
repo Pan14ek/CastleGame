@@ -8,13 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBController {
-    static final String DB_URL = "jdbc:h2:C:/Users/user/Desktop/CastleGame/castlegame";
-    static final String USER = "admin";
-    static final String PASSWORD = "admin";
-
-    public static void main(String[] args) {
-
-    }
+    private static final String DB_URL = "jdbc:h2:C:/Users/user/Desktop/CastleGame/castlegame";
+    private static final String USER = "admin";
+    private static final String PASSWORD = "admin";
 
     //quests ==> level
     //Answer,Score,Description
@@ -68,9 +64,22 @@ public class DBController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return levels;
     }
 
-
+    public void addNewScorePlayer(String nickname, int totalscore) {
+        try {
+            Class.forName("org.h2.Driver");
+            Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            String sql = "INSERT INTO PLAYER(NICKNAME,TOTAL_SCORE) VALUES ('" + nickname + "'," + totalscore + ")";
+            statement.executeUpdate(sql);
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
