@@ -15,7 +15,8 @@ public class Menu {
     private void menuInformation() {
         System.out.println("Choose point:");
         System.out.println("1.Start game");
-        System.out.println("2.Exit");
+        System.out.println("2.TOP Player");
+        System.out.println("3.Exit");
     }
 
     private void menuController(Game game, Scanner scanner) {
@@ -28,6 +29,9 @@ public class Menu {
                     game.printQuests(scanner);
                     break;
                 case 2:
+                    game.getTopPlayer();
+                    break;
+                case 3:
                     startGame = false;
                     break;
                 default:

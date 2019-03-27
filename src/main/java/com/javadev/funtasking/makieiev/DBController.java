@@ -72,8 +72,33 @@ public class DBController {
             Class.forName("org.h2.Driver");
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO PLAYER(NICKNAME,TOTAL_SCORE) VALUES ('" + nickname + "'," + totalscore + ")";
+            String sql = "INSERT INTO PLAYERRESULT(NICKNAME,TOTAL_SCORE) VALUES ('" + nickname + "'," + totalscore + ")";
             statement.executeUpdate(sql);
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getTopPlayer() {
+        try {
+            Class.forName("org.h2.Driver");
+            Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            String sql = "SELECT NICKNAME FROM PLAYERRESULT";
+            ResultSet result = statement.executeQuery(sql);
+//MAX(TOTAL_SCORE) ,
+            while (result.next()) {
+                System.out.println(result.getString("NICKNAME"));
+            }
+            /*
+            result.getInt("TOTAL_SCORE")
+                        + " " +
+             */
+            result.close();
             statement.close();
             connection.close();
         } catch (ClassNotFoundException e) {

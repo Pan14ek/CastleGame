@@ -134,4 +134,9 @@ public class Game {
         System.out.println("2.Middle;");
         System.out.println("3.Hard.");
     }
+
+    public void getTopPlayer() {
+        DBController dbController = new DBController();
+        dbController.getTopPlayer();
+    }
 }
