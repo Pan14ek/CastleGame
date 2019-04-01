@@ -123,7 +123,7 @@ public class Game {
                     flag = false;
                     break;
                 default:
-                    System.out.println("You wrote wrong number");
+                    System.out.println("Выбери корректный пункт меню");
                     break;
             }
         } while (flag);
@@ -132,7 +132,7 @@ public class Game {
 
     public void setPlayerProfile() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Hi,hero! Write your name:");
+        System.out.println("Привет,герой!Введи свое имя:");
         String name = scanner.next();
         this.player.setNickname(name);
         getSpecialMode(scanner);
@@ -140,10 +140,10 @@ public class Game {
     }
 
     private void menuMode() {
-        System.out.println("Choose your mode:");
-        System.out.println("1.Easy;");
-        System.out.println("2.Middle;");
-        System.out.println("3.Hard.");
+        System.out.println("Выбери уровень сложности:");
+        System.out.println("1.Легкий;");
+        System.out.println("2.Средний;");
+        System.out.println("3.Сложный.");
     }
 
     public void getTopPlayer() {

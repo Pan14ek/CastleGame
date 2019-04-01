@@ -10,11 +10,12 @@ public class Menu {
     }
 
     private void menuInformation() {
-        System.out.println("Choose point:");
-        System.out.println("1.Write your profile");
-        System.out.println("2.Start game");
-        System.out.println("3.Max score");
-        System.out.println("4.Exit");
+        System.out.println("Добро пожаловать,рыцарь!");
+        System.out.println("Выбери пункт меню:");
+        System.out.println("1.Ввести имя;");
+        System.out.println("2.Начать игру;");
+        System.out.println("3.Максимальный балл у игроков;");
+        System.out.println("4.Выход.");
     }
 
     private void menuController(Game game, Scanner scanner) {
@@ -42,7 +43,7 @@ public class Menu {
                     startGame = false;
                     break;
                 default:
-                    System.out.println("Your wrote wrong number");
+                    System.out.println("Выберите корректный пункт меню");
                     break;
             }
         } while (startGame && game.getPlayer().getHealth() > 0);
