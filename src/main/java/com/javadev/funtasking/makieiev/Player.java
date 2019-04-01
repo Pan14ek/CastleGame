@@ -1,12 +1,13 @@
 package com.javadev.funtasking.makieiev;
 
 public class Player {
+    private static final int RANDOM_NUMBER = 5;
     private String nickname;
     private int totalScore;
     private int health;
 
     public Player() {
-
+        this.health = RANDOM_NUMBER;
     }
 
     public Player(String nickname) {

@@ -5,33 +5,40 @@ import java.util.Scanner;
 public class Menu {
     public void activateGame() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Hi,hero! Write your name:");
-        String name = scanner.next();
-        Game game = new Game(new Player(name));
-        game.setLevels();
+        Game game = new Game();
         menuController(game, scanner);
     }
 
     private void menuInformation() {
         System.out.println("Choose point:");
-        System.out.println("1.Start game");
-        System.out.println("2.TOP Player");
-        System.out.println("3.Exit");
+        System.out.println("1.Write your profile");
+        System.out.println("2.Start game");
+        System.out.println("3.Max score");
+        System.out.println("4.Exit");
     }
 
     private void menuController(Game game, Scanner scanner) {
         boolean startGame = true;
-        game.getSpecialMode(scanner);
+        boolean profile = false;
         do {
             menuInformation();
             switch (scanner.nextInt()) {
                 case 1:
-                    game.printQuests(scanner);
+                    game.setPlayerProfile();
+                    profile = true;
                     break;
                 case 2:
-                    game.getTopPlayer();
+                    if (profile) {
+                        game.printQuests(scanner);
+                    } else {
+                        System.out.println("Сперва заполни свой профиль");
+                    }
                     break;
                 case 3:
+                    game.getTopPlayer();
+                    startGame = false;
+                    break;
+                case 4:
                     startGame = false;
                     break;
                 default:

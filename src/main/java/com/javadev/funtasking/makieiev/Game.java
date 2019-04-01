@@ -11,6 +11,8 @@ public class Game {
     private Player player;
 
     public Game() {
+
+        this.player = new Player();
     }
 
     public Game(Player player) {
@@ -103,7 +105,7 @@ public class Game {
         dbController.addNewScorePlayer(this.player.getNickname(), this.player.getTotalScore());
     }
 
-    public void getSpecialMode(Scanner scanner) {
+    private void getSpecialMode(Scanner scanner) {
         boolean flag = true;
         do {
             menuMode();
@@ -126,6 +128,15 @@ public class Game {
             }
         } while (flag);
 
+    }
+
+    public void setPlayerProfile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Hi,hero! Write your name:");
+        String name = scanner.next();
+        this.player.setNickname(name);
+        getSpecialMode(scanner);
+        this.setLevels();
     }
 
     private void menuMode() {

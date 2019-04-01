@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBController {
-    private static final String DB_URL = "jdbc:h2:C:/Users/user/Desktop/CastleGame/castlegame";
+    private static final String DB_URL = "jdbc:h2:D:/Programming/CastleGame/castlegame";
     private static final String USER = "admin";
     private static final String PASSWORD = "admin";
 
@@ -88,16 +88,11 @@ public class DBController {
             Class.forName("org.h2.Driver");
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
-            String sql = "SELECT NICKNAME FROM PLAYERRESULT";
+            String sql = "SELECT MAX(TOTAL_SCORE) AS TOTALSCORE FROM PLAYERRESULT";
             ResultSet result = statement.executeQuery(sql);
-//MAX(TOTAL_SCORE) ,
             while (result.next()) {
-                System.out.println(result.getString("NICKNAME"));
+                System.out.println(result.getInt("TOTALSCORE"));
             }
-            /*
-            result.getInt("TOTAL_SCORE")
-                        + " " +
-             */
             result.close();
             statement.close();
             connection.close();
